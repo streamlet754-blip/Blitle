@@ -1,10 +1,8 @@
 'use server';
 
 import { randomUUID } from 'crypto';
-import { PrismaClient } from '@prisma/client';
+import { hasDatabaseUrl, prisma } from '@/lib/prisma';
 import { createClient } from '@/lib/supabase/server';
-
-const prisma = new PrismaClient();
 
 export async function uploadImage(formData: FormData) {
   const file = formData.get('image') as File | null;
@@ -60,6 +58,10 @@ export async function createBlitle(formData: FormData) {
 
   if (!content.trim()) {
     return { success: false, error: 'Content is required.' };
+  }
+
+  if (!hasDatabaseUrl()) {
+    return { success: false, error: 'Database is not configured yet. Please add DATABASE_URL to the deployment environment.' };
   }
 
   try {
