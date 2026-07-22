@@ -52,28 +52,31 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-10">
-      <div className="mb-8 rounded-[28px] border border-slate-800/80 bg-slate-900/70 p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-        <p className="mb-2 text-sm uppercase tracking-[0.3em] text-slate-400">Blitle</p>
-        <h1 className="text-4xl font-semibold text-white">Share short ideas, images, and code</h1>
-        <p className="mt-3 text-slate-400">A clean, fast, and free-tier social experience.</p>
-      </div>
+    <main className="mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-10 sm:px-6 lg:px-8">
+      <section className="relative mb-8 overflow-hidden rounded-[32px] border border-slate-800/80 bg-slate-900/70 p-8 text-center shadow-[0_25px_80px_rgba(0,0,0,0.38)] backdrop-blur-2xl">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.16),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.16),_transparent_30%)]" />
+        <div className="relative z-10">
+          <p className="mb-3 text-sm uppercase tracking-[0.35em] text-slate-400">Blitle</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">Share short ideas, images, and code</h1>
+          <p className="mx-auto mt-3 max-w-2xl text-base text-slate-400 sm:text-lg">A clean, fast, and free-tier social experience designed to feel effortless.</p>
+        </div>
+      </section>
 
       {!user ? (
-        <div className="mb-8 rounded-[24px] border border-slate-800/80 bg-slate-900/70 p-6 text-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl">
+        <section className="mb-8 rounded-[24px] border border-slate-800/80 bg-slate-900/70 p-6 text-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl">
           <h2 className="text-xl font-semibold text-white">Login to post your first Blitle</h2>
           <p className="mt-2 text-sm text-slate-400">Magic links make it quick and frictionless.</p>
-          <Link href="/login" className="mt-4 inline-flex rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:brightness-110">
+          <Link href="/login" className="mt-5 inline-flex rounded-full bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:brightness-110">
             Go to login
           </Link>
-        </div>
+        </section>
       ) : (
         <>
           <CreateBlitle />
           <div className="mt-8 space-y-4">
             {blitles.length > 0 ? (
               blitles.map((blitle) => (
-                <article key={blitle.id} className="rounded-[24px] border border-slate-800/80 bg-slate-900/70 p-5 shadow-[0_16px_48px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+                <article key={blitle.id} className="rounded-[24px] border border-slate-800/80 bg-slate-900/70 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-slate-700">
                   <div className="mb-3 flex items-center justify-between">
                     <div>
                       <p className="font-medium text-white">{blitle.author.username ?? blitle.author.email}</p>
