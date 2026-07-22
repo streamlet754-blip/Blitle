@@ -18,9 +18,8 @@ export default function LoginPage() {
 
     const supabase = createClient();
 
-    const redirectTo = typeof window !== 'undefined'
-      ? `${window.location.origin}/auth/callback`
-      : 'https://blitle.vercel.app/auth/callback';
+    const siteUrl = process.env.NEXT_PUBLIC_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://blitle.vercel.app');
+    const redirectTo = `${siteUrl}/auth/callback`;
 
     try {
       const { error } = await supabase.auth.signInWithOtp({
@@ -35,7 +34,7 @@ export default function LoginPage() {
         return;
       }
 
-      setMessage('Check your email!');
+      setMessage('Check your email for the magic link.');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to send the magic link.');
     } finally {
