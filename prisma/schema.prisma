@@ -16,6 +16,8 @@ model User {
 
   blitles Blitle[]
   likes   Like[]
+  polls   Poll[]
+  votes   Vote[]
 
   @@index([created_at])
 }
@@ -48,4 +50,31 @@ model Like {
 
   @@unique([user_id, blitle_id])
   @@index([blitle_id])
+}
+
+model Poll {
+  id         String   @id @default(cuid())
+  title      String
+  createdAt  DateTime @default(now())
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  options    Option[]
+  votes      Vote[]
+}
+
+model Option {
+  id       String @id @default(cuid())
+  text     String
+  pollId   String
+  poll     Poll   @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  votes    Vote[]
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  userId    String
+  optionId  String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  option    Option   @relation(fields: [optionId], references: [id], onDelete: Cascade)
 }
