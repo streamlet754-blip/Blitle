@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  username   String?
+  avatar_url String?
+  created_at DateTime @default(now())
+
+  blitles Blitle[]
+  likes   Like[]
+
+  @@index([created_at])
+}
+
+model Blitle {
+  id           String   @id @default(cuid())
+  content      String
+  image_url    String?
+  code_snippet String?
+  language     String?
+  likes_count  Int      @default(0)
+  author_id    String
+  created_at   DateTime @default(now())
+
+  author User   @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  likes  Like[]
+
+  @@index([created_at])
+  @@index([likes_count])
+}
+
+model Like {
+  id         String   @id @default(cuid())
+  user_id    String
+  blitle_id  String
+  created_at DateTime @default(now())
+
+  user   User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  blitle Blitle @relation(fields: [blitle_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, blitle_id])
+  @@index([blitle_id])
+}
