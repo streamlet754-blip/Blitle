@@ -22,21 +22,25 @@ export default function LoginPage() {
       ? `${window.location.origin}/auth/callback`
       : 'https://blitle.vercel.app/auth/callback';
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: redirectTo,
-      },
-    });
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: redirectTo,
+        },
+      });
 
-    setLoading(false);
+      if (error) {
+        setError(error.message || 'Unable to send login link.');
+        return;
+      }
 
-    if (error) {
-      setError(error.message);
-      return;
+      setMessage('Check your email!');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send the magic link.');
+    } finally {
+      setLoading(false);
     }
-
-    setMessage('Check your email!');
   };
 
   return (
