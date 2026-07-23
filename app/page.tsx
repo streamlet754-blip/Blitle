@@ -54,12 +54,25 @@ export default async function HomePage() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-10 sm:px-6 lg:px-8">
-      <section className="relative mb-8 overflow-hidden rounded-[32px] border border-slate-800/80 bg-slate-900/70 p-8 text-center shadow-[0_25px_80px_rgba(0,0,0,0.38)] backdrop-blur-2xl">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.16),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.16),_transparent_30%)]" />
-        <div className="relative z-10">
-          <p className="mb-3 text-sm uppercase tracking-[0.35em] text-slate-400">Blitle</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">Share short ideas, images, and code</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-base text-slate-400 sm:text-lg">A clean, fast, and free-tier social experience designed to feel effortless.</p>
+      <header className="mb-14 flex items-center justify-between border-b border-slate-800/70 pb-5">
+        <Link href="/" className="text-lg font-semibold tracking-tight text-white">Blitle<span className="text-sky-400">.</span></Link>
+        <div className="flex items-center gap-3 text-xs text-slate-500">
+          <span className="hidden sm:inline">Ideas in motion</span>
+          {!user ? <Link href="/login" className="rounded-full border border-slate-700 px-3 py-1.5 text-slate-300 transition hover:border-sky-400 hover:text-white">Log in</Link> : <span className="rounded-full bg-emerald-400/10 px-3 py-1.5 text-emerald-300">Live feed</span>}
+        </div>
+      </header>
+
+      <section className="relative mb-12 overflow-hidden pb-2">
+        <div className="absolute -left-16 top-0 h-40 w-40 rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="relative z-10 max-w-3xl">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-sky-300">The short-form canvas</p>
+          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl">Make the small idea <span className="text-sky-300">matter.</span></h1>
+          <p className="mt-5 max-w-xl text-base leading-7 text-slate-400 sm:text-lg">Drop a thought, a picture, or a little code. Keep it under 60 words and let the good stuff travel.</p>
+          <div className="mt-7 flex items-center gap-6 text-xs uppercase tracking-[0.18em] text-slate-500">
+            <span><strong className="text-white">60</strong> words max</span>
+            <span className="h-1 w-1 rounded-full bg-sky-400" />
+            <span>Text · image · code</span>
+          </div>
         </div>
       </section>
 
@@ -74,10 +87,17 @@ export default async function HomePage() {
       ) : (
         <>
           <CreateBlitle />
-          <div className="mt-8 space-y-4">
+          <div className="mb-4 mt-14 flex items-end justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">Community drops</p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">Fresh from the feed</h2>
+            </div>
+            <span className="text-xs text-slate-500">{blitles.length} {blitles.length === 1 ? 'drop' : 'drops'}</span>
+          </div>
+          <div className="space-y-4">
             {blitles.length > 0 ? (
               blitles.map((blitle) => (
-                <article key={blitle.id} className="rounded-[24px] border border-slate-800/80 bg-slate-900/70 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-slate-700">
+                <article key={blitle.id} className="group rounded-[24px] border border-slate-800/80 bg-slate-900/70 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/40 hover:shadow-[0_22px_60px_rgba(14,165,233,0.12)]">
                   <div className="mb-3 flex items-center justify-between">
                     <div>
                       <p className="font-medium text-white">{blitle.author.username ?? blitle.author.email}</p>
@@ -85,8 +105,8 @@ export default async function HomePage() {
                     </div>
                     <span className="rounded-full bg-slate-800/80 px-3 py-1 text-xs text-slate-400">{blitle.likes_count} likes</span>
                   </div>
-                  <p className="whitespace-pre-wrap text-sm leading-7 text-slate-300">{blitle.content}</p>
-                  {blitle.image_url ? <img src={blitle.image_url} alt="Blitle attachment" className="mt-4 h-56 w-full rounded-2xl object-cover" /> : null}
+                  <p className="whitespace-pre-wrap text-base leading-7 text-slate-200">{blitle.content}</p>
+                  {blitle.image_url ? <img src={blitle.image_url} alt="Blitle attachment" className="mt-5 h-64 w-full rounded-2xl object-cover transition duration-500 group-hover:scale-[1.01]" /> : null}
                   {blitle.code_snippet ? (
                     <pre className="mt-4 overflow-x-auto rounded-2xl bg-slate-950/80 p-4 font-mono text-xs text-slate-300">
                       <code>{blitle.code_snippet}</code>
