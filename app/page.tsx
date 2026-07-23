@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CreateBlitle } from '@/components/CreateBlitle';
+import { CreateButton } from '@/components/CreateButton';
 import { createClient } from '@/lib/supabase/server';
 import { hasDatabaseUrl, prisma } from '@/lib/prisma';
 
@@ -101,6 +102,7 @@ export default async function HomePage() {
           </div>
         </>
       )}
+      <CreateButton loggedIn={Boolean(user)} />
     </main>
   );
 }

@@ -16,12 +16,11 @@ export default function LoginPage() {
     setError(null);
     setMessage(null);
 
-    const supabase = createClient();
-
     const siteUrl = process.env.NEXT_PUBLIC_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://blitle.vercel.app');
     const redirectTo = `${siteUrl}/auth/callback`;
 
     try {
+      const supabase = createClient();
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
