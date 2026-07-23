@@ -4,6 +4,31 @@ import { randomUUID } from 'crypto';
 import { hasDatabaseUrl, prisma } from '@/lib/prisma';
 import { createClient } from '@/lib/supabase/server';
 
+export async function sendMagicLink(email: string, redirectTo: string) {
+  if (!email.trim()) {
+    return { success: false, error: 'Enter your email address.' };
+  }
+
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
+      options: { emailRedirectTo: redirectTo },
+    });
+
+    if (error) {
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unable to contact Supabase.',
+    };
+  }
+}
+
 export async function uploadImage(formData: FormData) {
   const file = formData.get('image') as File | null;
 

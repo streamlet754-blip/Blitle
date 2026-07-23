@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { sendMagicLink } from '@/app/actions';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,16 +20,10 @@ export default function LoginPage() {
     const redirectTo = `${siteUrl}/auth/callback`;
 
     try {
-      const supabase = createClient();
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: redirectTo,
-        },
-      });
+      const result = await sendMagicLink(email, redirectTo);
 
-      if (error) {
-        setError(error.message || 'Unable to send login link.');
+      if (!result.success) {
+        setError(result.error || 'Unable to send login link.');
         return;
       }
 
