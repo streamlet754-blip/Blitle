@@ -198,12 +198,12 @@ export function Wallet () {
   if (!isDemoSession) {
     return (
       <main className="wallet-page flex min-h-screen items-center justify-center bg-[#080b12] px-5 py-12 text-slate-100">
-        <section className="w-full max-w-md rounded-3xl border border-white/[0.08] bg-[#10141d] p-7 shadow-2xl shadow-black/30 sm:p-9">
+        <section className="w-full max-w-md rounded-3xl border border-white/[0.08] bg-white p-7 shadow-2xl shadow-black/30 sm:p-9">
           <div className="mb-7 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-700 text-white">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-white">
               <WalletIcon size={22} />
             </span>
-            <span className="text-lg font-semibold tracking-tight">blitle<span className="text-blue-700">.</span></span>
+            <span className="text-lg font-semibold tracking-tight">blitle<span className="text-emerald-600">.</span></span>
           </div>
           <span className="inline-flex rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
             Demo mode
@@ -232,10 +232,10 @@ export function Wallet () {
       <header className="border-b border-white/[0.07] bg-[#0b0e16]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-3" aria-label="Blitle Wallet Demo home">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-700 text-white">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-white">
               <WalletIcon size={21} />
             </span>
-            <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-blue-700">.</span></span>
+            <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-emerald-600">.</span></span>
           </a>
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
@@ -265,135 +265,140 @@ export function Wallet () {
           </div>
         </div>
 
-        <section className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#171b25] via-[#11151e] to-[#17150f] p-6 sm:p-8">
-            <div className="pointer-events-none absolute -right-10 -top-20 h-64 w-64 rounded-full bg-orange-400/[0.08] blur-3xl" />
+        <section className="grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
+          <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 shadow-sm sm:p-8">
+            <div className="absolute -right-12 -top-16 h-48 w-48 rounded-full border-[28px] border-white/60" />
             <div className="relative">
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-slate-400">Total balance <span className="ml-1 text-slate-600">ⓘ</span></p>
-                <span className="rounded-full border border-white/[0.08] bg-black/10 px-3 py-1.5 text-[11px] font-medium text-slate-400">USD estimate</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-slate-500">
+                <WalletIcon size={16} />
+                Total balance
               </div>
-              <p className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">{formatUsd(totalUsd)}</p>
-              <p className="mt-2 text-sm text-slate-500">Your Demo portfolio value</p>
-
+              <p className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">{formatUsd(totalUsd)}</p>
+              <p className="mt-2 text-sm text-slate-500">Across {assetIds.length} demo assets</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button type="button" onClick={() => openModal('send')} className="inline-flex h-11 items-center gap-2 rounded-xl bg-orange-400 px-5 text-sm font-semibold text-slate-950 transition hover:bg-orange-300">
                   <ArrowUpRight size={17} /> Send
                 </button>
-                <button type="button" onClick={() => openModal('convert')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 text-sm font-semibold text-white transition hover:bg-white/[0.08]">
+                <button type="button" onClick={() => openModal('convert')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-5 text-sm font-semibold text-slate-700 transition hover:bg-white">
                   <ArrowLeftRight size={17} /> Swap
                 </button>
-                <button type="button" onClick={() => openModal('receive')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 text-sm font-semibold text-white transition hover:bg-white/[0.08]">
+                <button type="button" onClick={() => openModal('receive')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-5 text-sm font-semibold text-slate-700 transition hover:bg-white">
                   <ArrowDownLeft size={17} /> Receive
                 </button>
               </div>
-              <p className="mt-5 max-w-lg text-xs leading-5 text-slate-500">
-                Demo actions only. Nothing is sent, received, or exchanged on a blockchain.
-              </p>
+              <p className="mt-5 text-xs leading-5 text-slate-500">Demo only. No funds move and no blockchain is connected.</p>
             </div>
           </div>
 
-          <aside className="rounded-3xl border border-white/[0.08] bg-[#10141d] p-6 sm:p-7">
-            <div className="flex items-center justify-between">
-              <h2 className="font-semibold text-white">Wallet details</h2>
-              <WalletIcon size={17} className="text-slate-500" />
+          <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="font-semibold text-slate-900">Portfolio mix</h2>
+                <p className="mt-1 text-xs text-slate-500">By sample value</p>
+              </div>
+              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-500">USD</span>
+            </div>
+            <div className="mt-6 flex h-2.5 overflow-hidden rounded-full bg-slate-100" aria-label="Portfolio allocation">
+              {assetIds.map((asset) => (
+                <span
+                  key={asset}
+                  className={`${assets[asset].color} h-full transition-all`}
+                  style={{ width: `${totalUsd ? (balances[asset] / totalUsd) * 100 : 0}%` }}
+                  title={`${assets[asset].name}: ${totalUsd ? ((balances[asset] / totalUsd) * 100).toFixed(1) : '0.0'}%`}
+                />
+              ))}
             </div>
             <div className="mt-5 space-y-4">
-              <div className="flex gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-400/10 text-orange-300"><WalletIcon size={17} /></span>
-                <div>
-                  <p className="text-sm font-medium text-slate-200">Wallet type</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">Portfolio · Demo</p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-400/10 text-sky-300"><Clock3 size={17} /></span>
-                <div>
-                  <p className="text-sm font-medium text-slate-200">Network</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">Simulated · No blockchain connected</p>
-                </div>
-              </div>
-              <div className="rounded-xl border border-amber-400/10 bg-amber-400/[0.04] px-4 py-3 text-xs leading-5 text-amber-200/80">
-                This is a portfolio UI Demo, not a real wallet. Never enter a seed phrase or pay a fee here.
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        <section className="mt-6 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="overflow-hidden rounded-3xl border border-white/[0.08] bg-[#10141d]">
-            <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-5 sm:px-6">
-              <div>
-                <h2 className="font-semibold text-white">Your assets</h2>
-                <p className="mt-1 text-xs text-slate-500">Sample prices · values update with Demo actions</p>
-              </div>
-              <button type="button" onClick={() => openModal('convert')} className="inline-flex items-center gap-1.5 text-xs font-medium text-orange-300 transition hover:text-orange-200">
-                Convert <ArrowUpRight size={14} />
-              </button>
-            </div>
-            <div className="divide-y divide-white/[0.05]">
               {assetIds.map((asset) => {
-                const amount = balances[asset] / assets[asset].price;
+                const share = totalUsd ? (balances[asset] / totalUsd) * 100 : 0;
                 return (
-                  <div key={asset} className="flex items-center justify-between gap-4 px-5 py-4 sm:px-6">
-                    <div className="flex min-w-0 items-center gap-3">
-                      <AssetIcon asset={asset} />
-                      <div className="min-w-0">
-                        <p className="font-medium text-slate-100">{assets[asset].name}</p>
-                        <p className="mt-1 text-xs text-slate-500">{formatCrypto(amount, asset)}</p>
-                      </div>
+                  <div key={asset} className="flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2.5">
+                      <AssetIcon asset={asset} size="small" />
+                      <span className="truncate text-sm font-medium text-slate-700">{assets[asset].name}</span>
                     </div>
-                    <div className="text-right">
-                      <p className="font-medium tabular-nums text-slate-100">{formatUsd(balances[asset])}</p>
-                      <p className="mt-1 text-xs text-slate-500">1 {asset} = {formatUsd(assets[asset].price)}</p>
-                    </div>
+                    <span className="text-sm tabular-nums text-slate-500">{share.toFixed(1)}%</span>
                   </div>
                 );
               })}
             </div>
-          </div>
+          </aside>
+        </section>
 
-          <div className="overflow-hidden rounded-3xl border border-white/[0.08] bg-[#10141d]">
-            <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-5 sm:px-6">
-              <div>
-                <h2 className="font-semibold text-white">Recent activity</h2>
-                <p className="mt-1 text-xs text-slate-500">Local Demo history</p>
-              </div>
-              <History size={17} className="text-slate-500" />
+        <section className="mt-8">
+          <div className="mb-4 flex items-end justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Your tokens</h2>
+              <p className="mt-1 text-xs text-slate-500">Sample balances and prices</p>
             </div>
-            {transactions.length === 0 ? (
-              <div className="flex min-h-56 flex-col items-center justify-center px-6 text-center">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.04] text-slate-500"><History size={21} /></span>
-                <p className="mt-4 text-sm font-medium text-slate-300">Nothing here yet</p>
-                <p className="mt-1 max-w-xs text-xs leading-5 text-slate-500">Try a Demo send or conversion to see it in your activity.</p>
-              </div>
-            ) : (
-              <div className="max-h-[370px] divide-y divide-white/[0.05] overflow-y-auto">
-                {transactions.map((transaction) => (
-                  <div key={transaction.id} className="flex items-center justify-between gap-3 px-5 py-4 sm:px-6">
+            <span className="text-xs font-medium text-slate-400">{assetIds.length} assets</span>
+          </div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {assetIds.map((asset) => {
+              const amount = balances[asset] / assets[asset].price;
+              return (
+                <article key={asset} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <div className="flex items-center justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3">
-                      <AssetIcon asset={transaction.asset} size="small" />
+                      <AssetIcon asset={asset} />
                       <div className="min-w-0">
-                        <p className="text-sm font-medium text-slate-200">{transaction.type}</p>
-                        <p className="mt-1 truncate text-xs text-slate-500">
-                          {transaction.type === 'Sent' ? `To ${transaction.recipient}` : `To ${transaction.asset}`}
-                        </p>
-                        {transaction.reference ? <p className="mt-1 font-mono text-[10px] text-slate-600">{transaction.reference}</p> : null}
-                        <p className="mt-1 text-[11px] text-slate-600">{transaction.time.toLocaleString()}</p>
+                        <p className="truncate font-medium text-slate-900">{assets[asset].name}</p>
+                        <p className="mt-0.5 text-xs text-slate-500">{asset}</p>
                       </div>
                     </div>
-                    <div className="shrink-0 text-right">
-                      <p className="text-sm font-medium tabular-nums text-slate-200">{transaction.type === 'Converted' ? '+' : '-'}{formatCrypto(transaction.amount, transaction.asset)}</p>
-                      <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-400/[0.08] px-2 py-0.5 text-[10px] font-medium text-emerald-300">
-                        <Check size={11} /> {transaction.type === 'Sent' ? 'Sent · Demo' : 'Converted'}
-                      </span>
-                      {transaction.fee ? <p className="mt-1 text-[10px] text-slate-600">Demo fee {formatCrypto(transaction.fee, transaction.asset)}</p> : null}
+                    <span className="rounded-full bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-500">Demo</span>
+                  </div>
+                  <p className="mt-6 text-xl font-semibold tabular-nums text-slate-900">{formatUsd(balances[asset])}</p>
+                  <div className="mt-1 flex items-center justify-between gap-2 text-xs text-slate-500">
+                    <span className="truncate tabular-nums">{formatCrypto(amount, asset)}</span>
+                    <span className="shrink-0">{formatUsd(assets[asset].price)} / {asset}</span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 px-5 py-5 sm:px-6">
+            <div>
+              <h2 className="font-semibold text-slate-900">Activity</h2>
+              <p className="mt-1 text-xs text-slate-500">Recent demo activity</p>
+            </div>
+            <History size={17} className="text-slate-500" />
+          </div>
+          {transactions.length === 0 ? (
+            <div className="flex min-h-44 flex-col items-center justify-center px-6 text-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500"><History size={21} /></span>
+              <p className="mt-4 text-sm font-medium text-slate-700">No activity yet</p>
+              <p className="mt-1 max-w-xs text-xs leading-5 text-slate-500">Your simulated sends and swaps will show up here.</p>
+            </div>
+          ) : (
+            <div className="max-h-[370px] divide-y divide-slate-100 overflow-y-auto">
+              {transactions.map((transaction) => (
+                <div key={transaction.id} className="flex items-center justify-between gap-3 px-5 py-4 sm:px-6">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <AssetIcon asset={transaction.asset} size="small" />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-slate-800">{transaction.type}</p>
+                      <p className="mt-1 truncate text-xs text-slate-500">
+                        {transaction.type === 'Sent' ? `To ${transaction.recipient}` : `To ${transaction.asset}`}
+                      </p>
+                      {transaction.reference ? <p className="mt-1 font-mono text-[10px] text-slate-600">{transaction.reference}</p> : null}
+                      <p className="mt-1 text-[11px] text-slate-600">{transaction.time.toLocaleString()}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
+                  <div className="shrink-0 text-right">
+                    <p className="text-sm font-medium tabular-nums text-slate-800">{transaction.type === 'Converted' ? '+' : '-'}{formatCrypto(transaction.amount, transaction.asset)}</p>
+                    <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
+                      <Check size={11} /> {transaction.type === 'Sent' ? 'Sent · Demo' : 'Converted'}
+                    </span>
+                    {transaction.fee ? <p className="mt-1 text-[10px] text-slate-500">Demo fee {formatCrypto(transaction.fee, transaction.asset)}</p> : null}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         <footer className="mt-8 flex flex-col gap-2 border-t border-white/[0.06] pt-5 text-[11px] leading-5 text-slate-600 sm:flex-row sm:items-center sm:justify-between">

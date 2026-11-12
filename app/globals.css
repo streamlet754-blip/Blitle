@@ -31,8 +31,7 @@ body {
   background: #fff;
 }
 
-.wallet-page [class*="bg-[#"],
-.wallet-page [class*="bg-gradient-to-br"] {
+.wallet-page [class*="bg-[#"] {
   background-color: #fff !important;
   background-image: none !important;
 }
