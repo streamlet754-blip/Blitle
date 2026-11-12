@@ -267,26 +267,29 @@ export function Wallet () {
         </div>
 
         <section className="grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
-          <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 shadow-sm sm:p-8">
+          <div className="wallet-balance-card relative overflow-hidden rounded-3xl p-6 shadow-sm sm:p-8">
             <div className="relative">
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-500">
-                <WalletIcon size={16} />
-                Total balance
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="wallet-balance-label flex items-center gap-2 text-sm font-medium">
+                  <WalletIcon size={16} />
+                  Total balance
+                </div>
+                <span className="wallet-balance-tag rounded-full px-3 py-1.5 text-[11px] font-medium">Sample portfolio</span>
               </div>
-              <p className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">{formatUsd(totalUsd)}</p>
-              <p className="mt-2 text-sm text-slate-500">Across {assetIds.length} demo assets</p>
+              <p className="wallet-balance-amount mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">{formatUsd(totalUsd)}</p>
+              <p className="wallet-balance-caption mt-2 text-sm">Across {assetIds.length} demo assets · USD estimate</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <button type="button" onClick={() => openModal('send')} className="inline-flex h-11 items-center gap-2 rounded-xl bg-orange-400 px-5 text-sm font-semibold text-slate-950 transition hover:bg-orange-300">
+                <button type="button" onClick={() => openModal('send')} className="wallet-action wallet-action-primary inline-flex h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold transition">
                   <ArrowUpRight size={17} /> Send
                 </button>
-                <button type="button" onClick={() => openModal('convert')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-5 text-sm font-semibold text-slate-700 transition hover:bg-white">
+                <button type="button" onClick={() => openModal('convert')} className="wallet-action wallet-action-secondary inline-flex h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold transition">
                   <ArrowLeftRight size={17} /> Swap
                 </button>
-                <button type="button" onClick={() => openModal('receive')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-5 text-sm font-semibold text-slate-700 transition hover:bg-white">
+                <button type="button" onClick={() => openModal('receive')} className="wallet-action wallet-action-secondary inline-flex h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold transition">
                   <ArrowDownLeft size={17} /> Receive
                 </button>
               </div>
-              <p className="mt-5 text-xs leading-5 text-slate-500">Demo only. No funds move and no blockchain is connected.</p>
+              <p className="wallet-balance-caption mt-5 text-xs leading-5">Demo only. No funds move and no blockchain is connected.</p>
             </div>
           </div>
 

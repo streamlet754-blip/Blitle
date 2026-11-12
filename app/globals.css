@@ -91,3 +91,57 @@ body {
 .wallet-page [class*="shadow-"] {
   box-shadow: 0 8px 24px rgb(15 23 42 / 7%);
 }
+
+.wallet-page .wallet-balance-card {
+  isolation: isolate;
+  border: 1px solid rgb(255 255 255 / 18%);
+  background: linear-gradient(125deg, #102746 0%, #155e75 58%, #0f766e 100%);
+  box-shadow: 0 18px 40px rgb(15 45 70 / 16%);
+}
+
+.wallet-page .wallet-balance-card::after {
+  position: absolute;
+  z-index: -1;
+  top: -7rem;
+  right: -5rem;
+  width: 19rem;
+  height: 19rem;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgb(255 255 255 / 12%), transparent 68%);
+  content: "";
+}
+
+.wallet-page .wallet-balance-label,
+.wallet-page .wallet-balance-caption {
+  color: rgb(255 255 255 / 76%);
+}
+
+.wallet-page .wallet-balance-amount {
+  color: #fff;
+}
+
+.wallet-page .wallet-balance-tag {
+  border: 1px solid rgb(255 255 255 / 25%);
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+}
+
+.wallet-page .wallet-action-primary {
+  background: #fff;
+  color: #123b59;
+}
+
+.wallet-page .wallet-action-primary:hover {
+  background: #eaf3f7;
+}
+
+.wallet-page .wallet-action-secondary {
+  border: 1px solid rgb(255 255 255 / 30%);
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+}
+
+.wallet-page .wallet-action-secondary:hover {
+  background: rgb(255 255 255 / 20%);
+}
