@@ -3,8 +3,8 @@ import { CookieConsent } from '@/components/CookieConsent';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Blitle Wallet Demo',
-  description: 'A simulated crypto wallet. No real funds or transactions.',
+  title: 'Blitle Wallet',
+  description: 'A crypto wallet preview with sample balances and prices.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
