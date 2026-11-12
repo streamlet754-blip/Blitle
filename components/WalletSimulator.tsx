@@ -64,8 +64,8 @@ export function Wallet () {
   const [isDemoSession, setIsDemoSession] = useState(false);
   const [balances, setBalances] = useState<Record<AssetId, number>>({
     BTC: 2650,
-    ETH: 0,
-    USDT: 0,
+    ETH: 1200,
+    USDT: 600,
   });
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [modal, setModal] = useState<'send' | 'convert' | 'receive' | null>(null);
@@ -205,15 +205,16 @@ export function Wallet () {
             </span>
             <span className="text-lg font-semibold tracking-tight">blitle<span className="text-emerald-600">.</span></span>
           </div>
-          <span className="inline-flex rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
+          <span className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-900">
             Demo mode
           </span>
           <h1 className="mt-4 text-2xl font-semibold tracking-tight text-white">Open the sample wallet</h1>
           <p className="mt-2 text-sm leading-6 text-slate-400">
-            Explore a simulated account showing $2,650 in sample BTC value. No account or credentials are needed.
+            Explore a simulated portfolio with $4,450 in sample value across Bitcoin, Ethereum, and Tether. No account or credentials are needed.
           </p>
-          <div className="mt-6 rounded-2xl border border-amber-400/10 bg-amber-400/[0.04] p-4 text-xs leading-5 text-amber-100/80">
-            This is not a real wallet. Never enter a recovery phrase, private key, or password here. Demo sends only change this page’s sample balance and history.
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+            <p className="font-semibold">Safety reminder</p>
+            <p className="mt-1">This is not a real wallet. Never enter a recovery phrase, private key, or password here. Demo sends only change this page’s sample balance and history.</p>
           </div>
           <button
             type="button"
@@ -238,8 +239,8 @@ export function Wallet () {
             <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-emerald-600">.</span></span>
           </a>
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-900">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
               Demo mode
             </span>
             <button type="button" onClick={copyDemoId} className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-slate-300 transition hover:border-white/20 sm:flex">
@@ -267,7 +268,6 @@ export function Wallet () {
 
         <section className="grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
           <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-6 shadow-sm sm:p-8">
-            <div className="absolute -right-12 -top-16 h-48 w-48 rounded-full border-[28px] border-white/60" />
             <div className="relative">
               <div className="flex items-center gap-2 text-sm font-medium text-slate-500">
                 <WalletIcon size={16} />
