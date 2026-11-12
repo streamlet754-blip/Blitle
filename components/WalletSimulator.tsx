@@ -200,7 +200,7 @@ export function Wallet () {
       <main className="wallet-page flex min-h-screen items-center justify-center bg-[#080b12] px-5 py-12 text-slate-100">
         <section className="w-full max-w-md rounded-3xl border border-white/[0.08] bg-white p-7 shadow-2xl shadow-black/30 sm:p-9">
           <div className="mb-7 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-white">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-700 text-white">
               <WalletIcon size={22} />
             </span>
             <span className="text-lg font-semibold tracking-tight">blitle<span className="text-emerald-600">.</span></span>
@@ -233,7 +233,7 @@ export function Wallet () {
       <header className="border-b border-white/[0.07] bg-[#0b0e16]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-3" aria-label="Blitle Wallet Demo home">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-white">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-700 text-white">
               <WalletIcon size={21} />
             </span>
             <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-emerald-600">.</span></span>
