@@ -1,5 +1,5 @@
-import { WalletSimulator } from '@/components/WalletSimulator';
+import { Wallet } from '@/components/WalletSimulator';
 
 export default function HomePage() {
-  return <WalletSimulator />;
+  return <Wallet />;
 }

@@ -14,7 +14,7 @@ import {
   Copy,
   History,
   ShieldCheck,
-  Wallet,
+  Wallet as WalletIcon,
   X,
 } from 'lucide-react';
 
@@ -61,7 +61,8 @@ function AssetIcon({ asset, size = 'normal' }: { asset: AssetId; size?: 'normal'
   );
 }
 
-export function WalletSimulator() {
+export function Wallet () {
+  const [isDemoSession, setIsDemoSession] = useState(false);
   const [balances, setBalances] = useState<Record<AssetId, number>>({
     BTC: 2650,
     ETH: 0,
@@ -134,7 +135,7 @@ export function WalletSimulator() {
     }
 
     const now = Date.now();
-    const reference = `DEMO-${now.toString(36).toUpperCase()}`;
+    const reference = `Demo-${now.toString(36).toUpperCase()}`;
     setBalances((current) => ({
       ...current,
       [sendAsset]: Math.max(0, current[sendAsset] - sendValueUsd - simulatedFeeUsd),
@@ -187,12 +188,44 @@ export function WalletSimulator() {
 
   async function copyDemoId() {
     try {
-      await navigator.clipboard.writeText('blitle-demo-wallet');
+      await navigator.clipboard.writeText('blitle-Demo-wallet');
       setCopyStatus('copied');
       window.setTimeout(() => setCopyStatus(null), 1600);
     } catch {
       setCopyStatus('unavailable');
     }
+  }
+
+  if (!isDemoSession) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#080b12] px-5 py-12 text-slate-100">
+        <section className="w-full max-w-md rounded-3xl border border-white/[0.08] bg-[#10141d] p-7 shadow-2xl shadow-black/30 sm:p-9">
+          <div className="mb-7 flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-300 to-amber-500 text-slate-950">
+              <WalletIcon size={22} />
+            </span>
+            <span className="text-lg font-semibold tracking-tight">blitle<span className="text-orange-400">.</span></span>
+          </div>
+          <span className="inline-flex rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
+            Demo mode
+          </span>
+          <h1 className="mt-4 text-2xl font-semibold tracking-tight text-white">Open the sample wallet</h1>
+          <p className="mt-2 text-sm leading-6 text-slate-400">
+            Explore a simulated account showing $2,650 in sample BTC value. No account or credentials are needed.
+          </p>
+          <div className="mt-6 rounded-2xl border border-amber-400/10 bg-amber-400/[0.04] p-4 text-xs leading-5 text-amber-100/80">
+            This is not a real wallet. Never enter a recovery phrase, private key, or password here. Demo sends only change this page’s sample balance and history.
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsDemoSession(true)}
+            className="mt-6 h-12 w-full rounded-xl bg-orange-400 text-sm font-semibold text-slate-950 transition hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#10141d]"
+          >
+            Continue to Demo wallet
+          </button>
+        </section>
+      </main>
+    );
   }
 
   return (
@@ -201,7 +234,7 @@ export function WalletSimulator() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-3" aria-label="Blitle Wallet Demo home">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-300 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/10">
-              <Wallet size={21} />
+              <WalletIcon size={21} />
             </span>
             <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-orange-400">.</span></span>
           </a>
@@ -213,6 +246,9 @@ export function WalletSimulator() {
             <button type="button" onClick={copyDemoId} className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-slate-300 transition hover:border-white/20 sm:flex">
               {copyStatus === 'copied' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
               {copyStatus === 'copied' ? 'Copied' : copyStatus === 'unavailable' ? 'Copy unavailable' : 'Demo wallet ID'}
+            </button>
+            <button type="button" onClick={() => setIsDemoSession(false)} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-slate-300 transition hover:border-white/20 hover:text-white">
+              Exit Demo
             </button>
           </div>
         </div>
@@ -239,7 +275,7 @@ export function WalletSimulator() {
                 <span className="rounded-full border border-white/[0.08] bg-black/10 px-3 py-1.5 text-[11px] font-medium text-slate-400">USD estimate</span>
               </div>
               <p className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">{formatUsd(totalUsd)}</p>
-              <p className="mt-2 text-sm text-slate-500">Your demo portfolio value</p>
+              <p className="mt-2 text-sm text-slate-500">Your Demo portfolio value</p>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <button type="button" onClick={() => openModal('send')} className="inline-flex h-11 items-center gap-2 rounded-xl bg-orange-400 px-5 text-sm font-semibold text-slate-950 transition hover:bg-orange-300">
@@ -268,7 +304,7 @@ export function WalletSimulator() {
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-400/10 text-orange-300"><ArrowDownUp size={17} /></span>
                 <div>
                   <p className="text-sm font-medium text-slate-200">Try a conversion</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">Swap between demo assets at fixed sample prices.</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-500">Swap between Demo assets at fixed sample prices.</p>
                 </div>
               </div>
               <div className="flex gap-3">
@@ -279,7 +315,7 @@ export function WalletSimulator() {
                 </div>
               </div>
               <div className="rounded-xl border border-amber-400/10 bg-amber-400/[0.04] px-4 py-3 text-xs leading-5 text-amber-200/80">
-                This is a portfolio UI demo, not a real wallet. Never enter a seed phrase or pay a fee here.
+                This is a portfolio UI Demo, not a real wallet. Never enter a seed phrase or pay a fee here.
               </div>
             </div>
           </aside>
@@ -290,7 +326,7 @@ export function WalletSimulator() {
             <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-5 sm:px-6">
               <div>
                 <h2 className="font-semibold text-white">Your assets</h2>
-                <p className="mt-1 text-xs text-slate-500">Sample prices · values update with demo actions</p>
+                <p className="mt-1 text-xs text-slate-500">Sample prices · values update with Demo actions</p>
               </div>
               <button type="button" onClick={() => openModal('convert')} className="inline-flex items-center gap-1.5 text-xs font-medium text-orange-300 transition hover:text-orange-200">
                 Convert <ArrowUpRight size={14} />
@@ -322,7 +358,7 @@ export function WalletSimulator() {
             <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-5 sm:px-6">
               <div>
                 <h2 className="font-semibold text-white">Recent activity</h2>
-                <p className="mt-1 text-xs text-slate-500">Local demo history</p>
+                <p className="mt-1 text-xs text-slate-500">Local Demo history</p>
               </div>
               <History size={17} className="text-slate-500" />
             </div>
@@ -330,7 +366,7 @@ export function WalletSimulator() {
               <div className="flex min-h-56 flex-col items-center justify-center px-6 text-center">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.04] text-slate-500"><History size={21} /></span>
                 <p className="mt-4 text-sm font-medium text-slate-300">Nothing here yet</p>
-                <p className="mt-1 max-w-xs text-xs leading-5 text-slate-500">Try a demo send or conversion to see it in your activity.</p>
+                <p className="mt-1 max-w-xs text-xs leading-5 text-slate-500">Try a Demo send or conversion to see it in your activity.</p>
               </div>
             ) : (
               <div className="max-h-[370px] divide-y divide-white/[0.05] overflow-y-auto">
@@ -363,7 +399,7 @@ export function WalletSimulator() {
 
         <footer className="mt-8 flex flex-col gap-2 border-t border-white/[0.06] pt-5 text-[11px] leading-5 text-slate-600 sm:flex-row sm:items-center sm:justify-between">
           <span>Blitle Wallet Demo · Simulated balances, prices, fees, and history</span>
-          <span>Nothing in this demo connects to a wallet or blockchain.</span>
+          <span>Nothing in this Demo connects to a wallet or blockchain.</span>
         </footer>
       </div>
 
@@ -375,8 +411,8 @@ export function WalletSimulator() {
             <div className="mb-6 flex items-start justify-between">
               <div>
                 <span className="mb-3 inline-flex rounded-full border border-amber-400/20 bg-amber-400/[0.07] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-300">Simulation only</span>
-                <h2 id="modal-title" className="text-xl font-semibold text-white">{modal === 'send' ? sendStep === 'review' ? 'Review simulated send' : sendStep === 'complete' ? 'Demo send complete' : 'Send demo assets' : modal === 'convert' ? 'Convert assets' : 'Receive demo assets'}</h2>
-                <p className="mt-1 text-xs leading-5 text-slate-500">{modal === 'send' ? 'No blockchain transaction will be created.' : modal === 'convert' ? 'Sample-price conversion; no real exchange takes place.' : 'This demo cannot receive real crypto.'}</p>
+                <h2 id="modal-title" className="text-xl font-semibold text-white">{modal === 'send' ? sendStep === 'review' ? 'Review simulated send' : sendStep === 'complete' ? 'Demo send complete' : 'Send Demo assets' : modal === 'convert' ? 'Convert assets' : 'Receive Demo assets'}</h2>
+                <p className="mt-1 text-xs leading-5 text-slate-500">{modal === 'send' ? 'No blockchain transaction will be created.' : modal === 'convert' ? 'Sample-price conversion; no real exchange takes place.' : 'This Demo cannot receive real crypto.'}</p>
               </div>
               <button type="button" onClick={closeModal} aria-label="Close dialog" className="rounded-lg p-2 text-slate-500 transition hover:bg-white/[0.06] hover:text-white"><X size={18} /></button>
             </div>
@@ -395,8 +431,8 @@ export function WalletSimulator() {
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-xs font-medium text-slate-300">Recipient address or label</span>
-                  <input value={recipient} onChange={(event) => setRecipient(event.target.value)} maxLength={100} placeholder="Paste an address or enter a demo label" className="h-12 w-full rounded-xl border border-white/[0.09] bg-[#0c1018] px-4 text-sm text-white outline-none placeholder:text-slate-600 focus:border-orange-400/60" />
-                  <span className="mt-1.5 block text-[11px] leading-5 text-slate-600">Stored only in this page’s temporary demo history. Never enter a seed phrase or private key.</span>
+                  <input value={recipient} onChange={(event) => setRecipient(event.target.value)} maxLength={100} placeholder="Paste an address or enter a Demo label" className="h-12 w-full rounded-xl border border-white/[0.09] bg-[#0c1018] px-4 text-sm text-white outline-none placeholder:text-slate-600 focus:border-orange-400/60" />
+                  <span className="mt-1.5 block text-[11px] leading-5 text-slate-600">Stored only in this page’s temporary Demo history. Never enter a seed phrase or private key.</span>
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-xs font-medium text-slate-300">Amount</span>
@@ -418,7 +454,7 @@ export function WalletSimulator() {
                 </div>
                 {sendAmount && Number.isFinite(parsedSendAmount) && parsedSendAmount > 0 ? (
                   <div className="flex justify-between px-1 text-xs text-slate-400">
-                    <span>Amount + demo fee</span><span>{formatUsd(sendValueUsd + simulatedFeeUsd)}</span>
+                    <span>Amount + Demo fee</span><span>{formatUsd(sendValueUsd + simulatedFeeUsd)}</span>
                   </div>
                 ) : null}
                 {sendError ? <p role="alert" className="text-xs text-rose-300">{sendError}</p> : null}
@@ -432,13 +468,13 @@ export function WalletSimulator() {
                   <p className="mt-1 text-center text-sm text-slate-400">{formatUsd(sendValueUsd)}</p>
                   <div className="mt-5 space-y-3 border-t border-white/[0.07] pt-4 text-xs">
                     <div className="flex justify-between gap-4"><span className="text-slate-500">To</span><span className="max-w-[70%] break-all text-right text-slate-200">{recipient}</span></div>
-                    <div className="flex justify-between"><span className="text-slate-500">Network</span><span className="text-slate-200">{assets[sendAsset].name} · demo only</span></div>
+                    <div className="flex justify-between"><span className="text-slate-500">Network</span><span className="text-slate-200">{assets[sendAsset].name} · Demo only</span></div>
                     <div className="flex justify-between"><span className="text-slate-500">Estimated network fee</span><span className="text-slate-200">{formatUsd(simulatedFeeUsd)} ({formatCrypto(sendFeeCrypto, sendAsset)})</span></div>
                     <div className="flex justify-between border-t border-white/[0.07] pt-3 font-semibold"><span className="text-slate-300">Total balance change</span><span className="text-white">{formatUsd(sendValueUsd + simulatedFeeUsd)}</span></div>
                   </div>
                 </div>
                 <p className="rounded-xl border border-amber-400/10 bg-amber-400/[0.04] px-4 py-3 text-xs leading-5 text-amber-200/80">
-                  Final demo check: this will only update the on-screen balance and history. Nothing is broadcast and no fee is charged.
+                  Final Demo check: this will only update the on-screen balance and history. Nothing is broadcast and no fee is charged.
                 </p>
                 {sendError ? <p role="alert" className="text-xs text-rose-300">{sendError}</p> : null}
                 <div className="grid grid-cols-2 gap-3">
@@ -519,12 +555,12 @@ export function WalletSimulator() {
             ) : (
               <div className="space-y-4">
                 <div className="rounded-2xl border border-white/[0.07] bg-[#0c1018] p-5 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-300"><Wallet size={22} /></div>
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-300"><WalletIcon size={22} /></div>
                   <p className="mt-4 text-xs text-slate-500">Demo wallet ID</p>
-                  <p className="mt-1 font-mono text-sm text-slate-200">blitle-demo-wallet</p>
+                  <p className="mt-1 font-mono text-sm text-slate-200">blitle-Demo-wallet</p>
                   <button type="button" onClick={copyDemoId} className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-300 transition hover:bg-white/[0.05]">
                     {copyStatus === 'copied' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
-                    {copyStatus === 'copied' ? 'Copied' : copyStatus === 'unavailable' ? 'Copy unavailable' : 'Copy demo ID'}
+                    {copyStatus === 'copied' ? 'Copied' : copyStatus === 'unavailable' ? 'Copy unavailable' : 'Copy Demo ID'}
                   </button>
                 </div>
                 <p className="text-center text-xs leading-5 text-slate-500">This is a display-only identifier. No address is generated and no funds can be received.</p>
