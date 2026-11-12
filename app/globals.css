@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: dark;
+  background: #080b12;
 }
 
 html {
@@ -11,12 +12,7 @@ html {
 }
 
 body {
-  @apply min-h-screen bg-slate-950 text-slate-100 antialiased;
-  background-image:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 32%),
-    radial-gradient(circle at top right, rgba(217, 70, 239, 0.13), transparent 28%),
-    linear-gradient(135deg, #020617 0%, #0f172a 45%, #111827 100%);
-  background-attachment: fixed;
+  @apply min-h-screen bg-[#080b12] text-slate-100 antialiased;
 }
 
 ::selection {
