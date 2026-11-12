@@ -19,3 +19,76 @@ body {
   background: rgba(56, 189, 248, 0.3);
   color: white;
 }
+
+.wallet-page {
+  color-scheme: light;
+  background: #f4f6f9 !important;
+  color: #172033;
+}
+
+.wallet-page header {
+  border-color: #e5e9f0;
+  background: #fff;
+}
+
+.wallet-page [class*="bg-[#"],
+.wallet-page [class*="bg-gradient-to-br"] {
+  background-color: #fff !important;
+  background-image: none !important;
+}
+
+.wallet-page [class*="bg-white/"] {
+  background-color: #f8fafc !important;
+}
+
+.wallet-page [class*="border-white/"],
+.wallet-page [class*="divide-white/"] {
+  border-color: #e5e9f0 !important;
+}
+
+.wallet-page [class~="text-white"],
+.wallet-page [class~="text-slate-100"] {
+  color: #172033 !important;
+}
+
+.wallet-page [class~="text-slate-200"] {
+  color: #334155 !important;
+}
+
+.wallet-page [class~="text-slate-300"] {
+  color: #475569 !important;
+}
+
+.wallet-page [class~="text-slate-400"],
+.wallet-page [class~="text-slate-500"] {
+  color: #64748b !important;
+}
+
+.wallet-page [class~="text-slate-600"] {
+  color: #8290a4 !important;
+}
+
+.wallet-page [class~="bg-orange-400"] {
+  background-color: #3157d5 !important;
+}
+
+.wallet-page [class*="bg-orange-400/"] {
+  background-color: #edf2ff !important;
+}
+
+.wallet-page [class~="text-orange-300"],
+.wallet-page [class~="text-orange-200"] {
+  color: #3157d5 !important;
+}
+
+.wallet-page [class*="border-orange-400"] {
+  border-color: #3157d5 !important;
+}
+
+.wallet-page button[class~="bg-orange-400"] {
+  color: #fff !important;
+}
+
+.wallet-page [class*="shadow-"] {
+  box-shadow: 0 8px 24px rgb(15 23 42 / 7%);
+}

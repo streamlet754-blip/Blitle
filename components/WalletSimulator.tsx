@@ -9,7 +9,6 @@ import {
   Bitcoin,
   Check,
   ChevronDown,
-  CircleHelp,
   Clock3,
   Copy,
   History,
@@ -198,13 +197,13 @@ export function Wallet () {
 
   if (!isDemoSession) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#080b12] px-5 py-12 text-slate-100">
+      <main className="wallet-page flex min-h-screen items-center justify-center bg-[#080b12] px-5 py-12 text-slate-100">
         <section className="w-full max-w-md rounded-3xl border border-white/[0.08] bg-[#10141d] p-7 shadow-2xl shadow-black/30 sm:p-9">
           <div className="mb-7 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-300 to-amber-500 text-slate-950">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-700 text-white">
               <WalletIcon size={22} />
             </span>
-            <span className="text-lg font-semibold tracking-tight">blitle<span className="text-orange-400">.</span></span>
+            <span className="text-lg font-semibold tracking-tight">blitle<span className="text-blue-700">.</span></span>
           </div>
           <span className="inline-flex rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
             Demo mode
@@ -229,14 +228,14 @@ export function Wallet () {
   }
 
   return (
-    <main className="min-h-screen bg-[#080b12] text-slate-100">
+    <main className="wallet-page min-h-screen bg-[#080b12] text-slate-100">
       <header className="border-b border-white/[0.07] bg-[#0b0e16]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
           <a href="/" className="flex items-center gap-3" aria-label="Blitle Wallet Demo home">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-300 to-amber-500 text-slate-950 shadow-lg shadow-orange-500/10">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-700 text-white">
               <WalletIcon size={21} />
             </span>
-            <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-orange-400">.</span></span>
+            <span className="text-[17px] font-semibold tracking-tight">blitle<span className="text-blue-700">.</span></span>
           </a>
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/[0.08] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-300">
@@ -257,8 +256,8 @@ export function Wallet () {
       <div className="mx-auto max-w-7xl px-5 pb-12 pt-6 sm:px-8 sm:pt-10">
         <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">My wallet</p>
-            <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-[30px]">Welcome back</h1>
+            <p className="mb-2 text-xs font-medium text-slate-500">My wallet</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-[30px]">Your portfolio</h1>
           </div>
           <div className="inline-flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 py-2 text-xs text-slate-400">
             <ShieldCheck size={15} className="text-emerald-400" />
@@ -281,10 +280,10 @@ export function Wallet () {
                 <button type="button" onClick={() => openModal('send')} className="inline-flex h-11 items-center gap-2 rounded-xl bg-orange-400 px-5 text-sm font-semibold text-slate-950 transition hover:bg-orange-300">
                   <ArrowUpRight size={17} /> Send
                 </button>
-                <button type="button" onClick={() => openModal('receive')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 text-sm font-semibold text-white transition hover:bg-white/[0.08]">
+                <button type="button" onClick={() => openModal('convert')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 text-sm font-semibold text-white transition hover:bg-white/[0.08]">
                   <ArrowLeftRight size={17} /> Swap
                 </button>
-                <button type="button" onClick={() => openModal('convert')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 text-sm font-semibold text-white transition hover:bg-white/[0.08]">
+                <button type="button" onClick={() => openModal('receive')} className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-5 text-sm font-semibold text-white transition hover:bg-white/[0.08]">
                   <ArrowDownLeft size={17} /> Receive
                 </button>
               </div>
@@ -296,22 +295,22 @@ export function Wallet () {
 
           <aside className="rounded-3xl border border-white/[0.08] bg-[#10141d] p-6 sm:p-7">
             <div className="flex items-center justify-between">
-              <h2 className="font-semibold text-white">Quick tips</h2>
-              <CircleHelp size={17} className="text-slate-500" />
+              <h2 className="font-semibold text-white">Wallet details</h2>
+              <WalletIcon size={17} className="text-slate-500" />
             </div>
             <div className="mt-5 space-y-4">
               <div className="flex gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-400/10 text-orange-300"><ArrowDownUp size={17} /></span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-orange-400/10 text-orange-300"><WalletIcon size={17} /></span>
                 <div>
-                  <p className="text-sm font-medium text-slate-200">Try a conversion</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">Swap between Demo assets at fixed sample prices.</p>
+                  <p className="text-sm font-medium text-slate-200">Wallet type</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-500">Portfolio · Demo</p>
                 </div>
               </div>
               <div className="flex gap-3">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-400/10 text-sky-300"><Clock3 size={17} /></span>
                 <div>
-                  <p className="text-sm font-medium text-slate-200">Explore the activity list</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-500">Simulated sends appear as “Sent” in your history.</p>
+                  <p className="text-sm font-medium text-slate-200">Network</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-500">Simulated · No blockchain connected</p>
                 </div>
               </div>
               <div className="rounded-xl border border-amber-400/10 bg-amber-400/[0.04] px-4 py-3 text-xs leading-5 text-amber-200/80">
